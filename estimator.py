@@ -1,4 +1,4 @@
-
+import data
 
 def estimateAverageDegree():
 	pass
