@@ -1,7 +1,7 @@
 import data
 import sys
 import glob
-import utils
+from utils import *
 
 STEP_IN_PIECE = 1000000
 RW_PIECE_NAME = data.RW_PATH + 'rw.%d.txt'

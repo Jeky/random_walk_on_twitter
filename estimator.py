@@ -2,7 +2,7 @@ import data
 import rw
 import sys
 import degree
-import utils
+from utils import *
 
 @printRunningTime
 def estimateAverageDegree(top = 100000):

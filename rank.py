@@ -2,7 +2,7 @@ import data
 import sys
 import rw
 from collections import Counter
-import utils
+from utils import *
 
 
 @printRunningTime

@@ -1,6 +1,6 @@
 import rw
 import rank
-import utils
+from utils import *
 
 TOP = 100
 SAMPLE_COUNT = 100

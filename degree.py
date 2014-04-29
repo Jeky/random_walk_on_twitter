@@ -1,7 +1,7 @@
 import sys
 import data
 from collections import *
-import utils
+from utils import *
 
 FROM_INDEX = 'from'
 TO_INDEX = 'to'
