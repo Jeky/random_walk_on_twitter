@@ -33,6 +33,9 @@ def getRank(top = 0, withCount = False):
 		if top != 0 and i == top:
 			break
 
+		if i != 0 and i % 1000000 == 0:
+			print 'read', i, 'lines'
+
 		tid, count = l.strip().split('\t')
 		if withCount:
 			rankList.append((int(tid), int(count)))
