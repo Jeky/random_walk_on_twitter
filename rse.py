@@ -1,10 +1,13 @@
 import rw
 import rank
+import utils
 
 TOP = 100
 SAMPLE_COUNT = 100
 SAMPLE_TIME = 100
 
+
+@printRunningTime
 def count(arr):
 	freq = {}
 	for i in arr:
@@ -18,6 +21,7 @@ def count(arr):
 	return [f[0] for f in freq]
 
 
+@printRunningTime
 def getRank(freq, rankList):
 	ranks = {}
 	for r in rankList:
@@ -33,6 +37,7 @@ def getRank(freq, rankList):
 	return [x[1] for x in ranks]
 
 
+@printRunningTime
 def rse(steps, rankList):
 	eachSize = len(steps) / SAMPLE_TIME / SAMPLE_COUNT
 	outputs = []

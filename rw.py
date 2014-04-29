@@ -1,15 +1,18 @@
 import data
 import sys
 import glob
+import utils
 
 STEP_IN_PIECE = 1000000
 RW_PIECE_NAME = data.RW_PATH + 'rw.%d.txt'
 
 
+@printRunningTime
 def getRwFileCount():
 	return len(glob.glob(data.RW_PATH + '*'))
 
 
+@printRunningTime
 def split():
 	'''
 	Split random walk file into pieces. Every piece contains 1,000,000 steps
@@ -38,6 +41,7 @@ def split():
 	frw.close()
 
 
+@printRunningTime
 def readSteps():
 	'''
 	Read all steps of random walk

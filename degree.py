@@ -1,10 +1,12 @@
 import sys
 import data
 from collections import *
+import utils
 
 FROM_INDEX = 'from'
 TO_INDEX = 'to'
 
+@printRunningTime
 def countDegree(index):
 	'''
 	Count the in/out degree of graph file
@@ -37,6 +39,7 @@ def countDegree(index):
 	fcount.close()
 
 
+@printRunningTime
 def getDegree(top = 0, withCount = False):
 	'''
 	Get top n degree node with the count. If n = 0, return all nodes.

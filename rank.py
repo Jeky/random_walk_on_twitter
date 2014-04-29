@@ -2,8 +2,10 @@ import data
 import sys
 import rw
 from collections import Counter
+import utils
 
 
+@printRunningTime
 def countRank():
 	'''
 	Count the samples by step, and then sort them by count descendingly
@@ -18,6 +20,7 @@ def countRank():
 	frand.close()
 
 
+@printRunningTime
 def getRank(top = 0, withCount = False):
 	'''
 	Get top n rank node with the count. If n = 0, return all nodes.
