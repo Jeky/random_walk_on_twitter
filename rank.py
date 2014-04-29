@@ -10,8 +10,11 @@ def countRank():
 	'''
 	Count the samples by step, and then sort them by count descendingly
 	'''
-	steps = rw.readSteps()
-	counter = Counter(steps)
+	counter = Counter()
+	def walker(tid, tag):
+		counter[tid] += 1
+
+	walkOnSampleResult.walkOnSampleResult(walker)
 
 	frand = open(data.RANK_FILE, 'w')
 	i = 0

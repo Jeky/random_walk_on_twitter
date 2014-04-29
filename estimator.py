@@ -12,9 +12,16 @@ def estimateAverageDegree(top = 100000):
 	fest = open(data.ESITMATE_FILE, 'w')
 	rd = 0.0
 
+	counter = 0.0
+
 	for i in range(top):
-		rd += 1.0 / deg[steps[i]]
-		est = (i + 1.0) / rd
+		d = deg[steps[i]]
+		if d == 0:
+			continue
+
+		counter += 1.0
+		rd += 1.0 / d
+		est = counter / rd
 		fest.write('%lf\n' % est)
 
 	fest.close()
