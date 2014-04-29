@@ -1,17 +1,18 @@
 import data
 import rw
 import sys
-import rank
+import degree
 
 def estimateAverageDegree(top = 100000):
 	steps = rw.readSteps()
-	degree = {k:v for k,v in rank.getRank(withCount = True)}
+	deg = {k:v for k,v in degree.getDegree(withCount = True)}
 
 	fest = open(data.ESITMATE_FILE, 'w')
 	rd = 0.0
 
 	for i in range(top):
-		rd += 1.0 / degree[steps[i]]
+		count += 1.0
+		rd += 1.0 / deg[steps[i]]
 		est = (i + 1.0) / rd
 		fest.write('%lf\n' % est)
 

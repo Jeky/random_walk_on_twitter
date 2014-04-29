@@ -1,3 +1,4 @@
+import sys
 import data
 from collections import *
 
@@ -34,6 +35,29 @@ def countDegree(index):
 		fcount.write('%s\t%d\n' % (tid, c))
 
 	fcount.close()
+
+
+def getDegree(top = 0, withCount = False):
+	'''
+	Get top n degree node with the count. If n = 0, return all nodes.
+	Returning value is like this:
+	[(1234,1111), (2345, 555), (555, 111), (111, 0)]
+	'''
+	degreeList = []
+	fdegree = open(data.NODE_OUT_DEGREE_FILE)
+	for i, l in enumerate(fdegree.xreadlines()):
+		if top != 0 and i == top:
+			break
+
+		tid, count = l.strip().split('\t')
+		if withCount:
+			degreeList.append((int(tid), int(count)))
+		else:
+			degreeList.append(int(tid))
+
+	fdegree.close()
+
+	return degreeList
 
 
 def printUsage():
