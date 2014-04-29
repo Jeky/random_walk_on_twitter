@@ -14,8 +14,12 @@ def countRank():
 	counter = Counter(steps)
 
 	frand = open(data.RANK_FILE, 'w')
+	i = 0
 	for tid, c in counter.most_common():
+		if i != 0 and i % 1000000 == 0:
+			print 'read', i, 'lines'
 		frand.write('%d\t%d\n' % (tid, c))
+		i += 1
 
 	frand.close()
 

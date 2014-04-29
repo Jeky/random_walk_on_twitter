@@ -13,12 +13,8 @@ def estimateAverageDegree(top = 100000):
 	rd = 0.0
 
 	for i in range(top):
-		'''
 		rd += 1.0 / deg[steps[i]]
 		est = (i + 1.0) / rd
-		'''
-		rd += deg[steps[i]]
-		est = rd / (i + 1.0)
 		fest.write('%lf\n' % est)
 
 	fest.close()
