@@ -5,8 +5,10 @@ import glob
 STEP_IN_PIECE = 1000000
 RW_PIECE_NAME = data.RW_PATH + 'rw.%d.txt'
 
+
 def getRwFileCount():
 	return len(glob.glob(data.RW_PATH + '*'))
+
 
 def split():
 	'''
@@ -34,6 +36,7 @@ def split():
 
 	fout.close()
 	frw.close()
+
 
 def readSteps():
 	'''
