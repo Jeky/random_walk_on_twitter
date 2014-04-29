@@ -14,7 +14,7 @@ def countRank():
 	def walker(tid, tag):
 		counter[tid] += 1
 
-	walkOnSampleResult.walkOnSampleResult(walker)
+	rw.walkOnSampleResult(walker)
 
 	frand = open(data.RANK_FILE, 'w')
 	i = 0
