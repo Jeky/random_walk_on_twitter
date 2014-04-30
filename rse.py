@@ -43,7 +43,7 @@ def rse(steps, rankList):
 	outputs = []
 
 	for k in range(TOP):
-		f = open('sampele-%d.txt' % (k + 1), 'w')
+		f = open('sample-%d.txt' % (k + 1), 'w')
 		outputs.append(f)
 
 	for i in range(1, SAMPLE_TIME + 1):
