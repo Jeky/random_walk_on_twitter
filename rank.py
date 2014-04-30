@@ -13,6 +13,7 @@ def countRank():
 	counter = Counter()
 	def walker(tid, tag):
 		counter[tid] += 1
+		return True
 
 	rw.walkOnSampleResult(walker)
 
