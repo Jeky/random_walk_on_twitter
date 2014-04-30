@@ -132,7 +132,7 @@ def walkOnSampleResult(walker):
 				removeCount -= 1
 
 			if removeCount == 0:
-				if not walker(tid, tag):
+				if not walker(int(tid), tag):
 					con = False
 
 		rwpiece.close()
