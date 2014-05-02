@@ -66,5 +66,5 @@ def rse(steps, rankList):
 
 if __name__ == '__main__':
 	steps = rw.readSteps()
-	rank = rank.loadRank()
+	rank = rank.getRank()
 	rse(steps, rank[:TOP])

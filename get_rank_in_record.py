@@ -14,30 +14,28 @@ steps = []
 
 out = open('rank-1.txt', 'w')
 
+fin = open(data.PATH + 'rw.50m.txt')
+
 print 'tid of rank 1: ', tid
+for i, l in enumerate(fin.xreadlines()):
+	if i % 1000000 == 0:
+		print i
+	tid, tag = l.strip().split('\t')
+	steps.append(tid)
 
-for i in range(rw.getRwFileCount()):
-	rwpiece = open(RW_PIECE_NAME % i)
-	print 'reading', RW_PIECE_NAME % i
+	if len(steps) == size:
+		rank = 0
+		count = 0
+		counter = Counter(steps)
+		for r, item in enumerate(counter.most_common(100)):
+			if item[0] == tid:
+				rank = r + 1
+				count = item[1]
+				break
 
-	for l in rwpiece.xreadlines():
-		tid, tag = l.strip().split('\t')
-		steps.append(tid)
+		out.write('%d\t%d\n' % (rank, count))
 
-		if len(steps) == size:
-			rank = 0
-			count = 0
-			counter = Counter(steps)
-			for r, item in enumerate(counter.most_common(100)):
-				if item[0] == tid:
-					rank = r + 1
-					count = item[1]
-					break
+		steps = []
 
-			out.write('%d\t%d\n' % (rank, count))
-
-			steps = []
-
-	rwpiece.close()
-
+fin.close()
 out.close()
