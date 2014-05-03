@@ -7,7 +7,6 @@ SAMPLE_COUNT = 100
 SAMPLE_TIME = 100
 
 
-@printRunningTime
 def count(arr):
 	freq = {}
 	for i in arr:
@@ -21,7 +20,6 @@ def count(arr):
 	return [f[0] for f in freq]
 
 
-@printRunningTime
 def getRank(freq, rankList):
 	ranks = {}
 	for r in rankList:
