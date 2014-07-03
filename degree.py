@@ -67,7 +67,7 @@ def getDegree(top = 0, withCount = False):
 
 
 def printUsage():
-	print '''python count_degree.py in|out'''
+	print '''python degree.py to|from'''
 
 
 if __name__ == '__main__':
