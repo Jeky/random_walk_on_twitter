@@ -5,6 +5,7 @@ from utils import *
 
 IN_INDEX = 'in'
 OUT_INDEX = 'out'
+UNDIRECTED_GRAPH_INDEX = 'ug'
 
 @printRunningTime
 def countDegree(index):
@@ -15,6 +16,8 @@ def countDegree(index):
         print 'Counting in degree'
     elif index == OUT_INDEX:
         print 'Counting out degree'
+    elif index == UNDIRECTED_GRAPH_INDEX:
+        print 'Counting undirected graph degree'
 
     fdata = open(data.ORINGNAL_FILE)
     counter = Counter()
@@ -29,6 +32,9 @@ def countDegree(index):
             counter[toId] += 1
         elif index == OUT_INDEX:
             counter[fromId] += 1
+        elif index == UNDIRECTED_GRAPH_INDEX:
+            counter[toId] += 1
+            counter[fromId] += 1
 
     fdata.close()
 
@@ -36,6 +42,8 @@ def countDegree(index):
         fcount = open(data.NODE_IN_DEGREE_FILE, 'w')
     elif index == OUT_INDEX:
         fcount = open(data.NODE_OUT_DEGREE_FILE, 'w')
+    elif index == UNDIRECTED_GRAPH_INDEX:
+        fcount = open(data.NODE_UG_DEGREE_FILE, 'w')
 
     for tid, c in counter.most_common():
         fcount.write('%s\t%d\n' % (tid, c))
@@ -71,14 +79,14 @@ def getDegree(top = 0, withCount = False):
 
 
 def printUsage():
-    print '''python degree.py in|out'''
+    print '''python degree.py in|out|ug'''
 
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         printUsage()
 
-    elif sys.argv[1] in [IN_INDEX, OUT_INDEX]:
+    elif sys.argv[1] in [IN_INDEX, OUT_INDEX, UNDIRECTED_GRAPH_INDEX]:
         countDegree(sys.argv[1])
     else:
         printUsage()
