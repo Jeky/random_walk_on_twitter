@@ -3,36 +3,40 @@ import data
 from collections import *
 from utils import *
 
-FROM_INDEX = 'from'
-TO_INDEX = 'to'
+IN_INDEX = 'in'
+OUT_INDEX = 'out'
 
 @printRunningTime
 def countDegree(index):
 	'''
 	Count the in/out degree of graph file
 	'''
+    if index == IN_INDEX:
+        print 'Counting in degree'
+    elif index == OUT_INDEX:
+        print 'Counting out degree'
+
 	fdata = open(data.ORINGNAL_FILE)
 	counter = Counter()
 
 	for i, l in enumerate(fdata.xreadlines()):
-		if i != 0 and i % 100000 == 0:
+		if i != 0 and i % 1000000 == 0:
 			print 'read', i, 'lines'
 
 		fromId, toId = l.strip().split('\t')
 
-		if index == FROM_INDEX:
-			counter[fromId] += 1
-		elif index == TO_INDEX:
+		if index == IN_INDEX:
 			counter[toId] += 1
+		elif index == OUT_INDEX:
+			counter[fromId] += 1
 
 	fdata.close()
 
-	if index == FROM_INDEX:
-		fcount = open(data.NODE_OUT_DEGREE_FILE, 'w')
-	elif index == TO_INDEX:
+	if index == IN_INDEX:
 		fcount = open(data.NODE_IN_DEGREE_FILE, 'w')
+	elif index == OUT_INDEX:
+		fcount = open(data.NODE_OUT_DEGREE_FILE, 'w')
 
-	print 'writing degree count file'
 	for tid, c in counter.most_common():
 		fcount.write('%s\t%d\n' % (tid, c))
 
@@ -67,14 +71,14 @@ def getDegree(top = 0, withCount = False):
 
 
 def printUsage():
-	print '''python degree.py to|from'''
+	print '''python degree.py in|out'''
 
 
 if __name__ == '__main__':
 	if len(sys.argv) != 2:
 		printUsage()
 
-	elif sys.argv[1] in ['to', 'from']:
+	elif sys.argv[1] in [IN_INDEX, OUT_INDEX]:
 		countDegree(sys.argv[1])
 	else:
 		printUsage()
