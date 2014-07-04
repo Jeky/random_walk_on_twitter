@@ -52,6 +52,35 @@ def countDegree(index):
 
 
 @printRunningTime
+def countAllDegree():
+    '''
+    Count the all degree of graph file
+    '''
+    fdata = open(data.ORINGNAL_FILE)
+    inCounter = Counter()
+    outCounter = Counter()
+    ids = Set()
+
+    for i, l in enumerate(fdata.xreadlines()):
+        if i != 0 and i % 1000000 == 0:
+            print 'read', i, 'lines'
+
+        fromId, toId = l.strip().split('\t')
+        inCounter[toId] += 1
+        outCounter[fromId] += 1
+        ids.add(toId)
+        ids.add(fromId)
+
+    fdata.close()
+
+    fcount = open(data.DEGREE_FILE, 'w')
+
+    for tid in ids:
+        fcount.write('%s\t%d\t%d\n' % (tid, inCounter[tid], outCounter[tid]))
+
+    fcount.close()
+
+@printRunningTime
 def getDegree(top = 0, withCount = False):
     '''
     Get top n degree node with the count. If n = 0, return all nodes.
@@ -83,9 +112,11 @@ def printUsage():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        printUsage()
+    if len(sys.argv) == 1:
+        countAllDegree()
 
+    elif len(sys.argv) != 2:
+        printUsage()
     elif sys.argv[1] in [IN_INDEX, OUT_INDEX, UNDIRECTED_GRAPH_INDEX]:
         countDegree(sys.argv[1])
     else:
