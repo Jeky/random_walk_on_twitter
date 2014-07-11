@@ -138,7 +138,6 @@ def walkOnSampleResult(walker):
         rwpiece.close()
 
 
-
 def printUsage():
     print '''python rw.py split'''
 

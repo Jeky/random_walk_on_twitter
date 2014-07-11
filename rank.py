@@ -33,7 +33,7 @@ def getRank(top = 0, withCount = False):
     '''
     Get top n rank node with the count. If n = 0, return all nodes.
     Returning value is like this:
-    [(1234,1111), (2345, 555), (555, 111), (111, 0)]
+    [(1234, 1111), (2345, 555), (555, 111), (111, 0)]
     '''
     rankList = []
     frand = open(data.RANK_FILE)
