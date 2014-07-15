@@ -53,11 +53,11 @@ def countDegree(index):
 
 
 @printRunningTime
-def countAllDegree():
+def countAllDegree(graphFile, outputFile):
     '''
     Count the all degree of graph file
     '''
-    fdata = open(data.ORINGNAL_FILE)
+    fdata = open(graphFile)
     inCounter = Counter()
     outCounter = Counter()
     ids = Set()
@@ -74,7 +74,7 @@ def countAllDegree():
 
     fdata.close()
 
-    fcount = open(data.DEGREE_FILE, 'w')
+    fcount = open(outputFile, 'w')
 
     for tid in ids:
         fcount.write('%s\t%d\t%d\n' % (tid, inCounter[tid], outCounter[tid]))
@@ -114,7 +114,7 @@ def printUsage():
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
-        countAllDegree()
+        countAllDegree(data.ORINGNAL_FILE, data.DEGREE_FILE)
 
     elif len(sys.argv) != 2:
         printUsage()

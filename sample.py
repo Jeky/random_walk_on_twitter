@@ -2,6 +2,7 @@ import random
 import glob
 import os.path
 from utils import *
+from collections import Counter
 
 JUMP_TAG = 1
 WALK_TAG = 0
@@ -11,6 +12,7 @@ PRINT_STEP = 100000
 def loadGraph(filename):
     f = open(filename)
     g = {}
+    g['in'] = Counter()
 
     for i, l in enumerate(f.xreadlines()):
         fromId, toId = l.strip().split('\t')
@@ -20,6 +22,7 @@ def loadGraph(filename):
             g[fromId] = []
 
         g[fromId].append(toId)
+        g['in'][toId] += 1
 
     f.close()
 
@@ -67,7 +70,7 @@ def _randomContinueWalk(graph, length, out, jp):
     ids = graph.keys()
 
     currentId = random.choice(ids)
-    out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+    out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
     count += 1
 
     while count < length:
@@ -76,18 +79,18 @@ def _randomContinueWalk(graph, length, out, jp):
 
         if currentId not in graph: # dead end
             currentId = random.choice(ids)
-            out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+            out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
             count += 1
 
         if jp == 0.05 or jp == 0.1 or jp == 0.2:
             if withinCount == int(1 / jp) - 1: # jump
                 currentId = random.choice(ids)
-                out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+                out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
                 count += 1
                 withinCount = 0
             else: # walk
                 currentId = random.choice(graph[currentId])
-                out.write('%s\t%d\n' % (currentId, WALK_TAG))
+                out.write('%s\t%d\n' % (graph['in'][currentId], WALK_TAG))
                 count += 1
                 withinCount += 1
         else:
@@ -95,12 +98,12 @@ def _randomContinueWalk(graph, length, out, jp):
                 withinCount = 0
             elif withinCount < 100 and withinCount >= 100 * (1 - jp): # jump
                 currentId = random.choice(ids)
-                out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+                out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
                 count += 1
                 withinCount += 1
             else: # walk
                 currentId = random.choice(graph[currentId])
-                out.write('%s\t%d\n' % (currentId, WALK_TAG))
+                out.write('%s\t%d\n' % (graph['in'][currentId], WALK_TAG))
                 count += 1
                 withinCount += 1
 
@@ -123,7 +126,7 @@ def _randomWalkAndRemoveFirst(graph, length, out, jp):
 
         else: # walk
             currentId = random.choice(graph[currentId])
-            out.write('%s\t%d\n' % (currentId, WALK_TAG))
+            out.write('%s\t%d\n' % (graph['in'][currentId], WALK_TAG))
             count += 1
 
 
@@ -132,7 +135,7 @@ def _randomWalk(graph, length, out, jp):
     ids = graph.keys()
 
     currentId = random.choice(ids)
-    out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+    out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
     count += 1
 
     while count < length:
@@ -141,17 +144,17 @@ def _randomWalk(graph, length, out, jp):
 
         if currentId not in graph: # dead end
             currentId = random.choice(ids)
-            out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+            out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
             count += 1
 
         elif random.random() < jp: # jump
             currentId = random.choice(ids)
-            out.write('%s\t%d\n' % (currentId, JUMP_TAG))
+            out.write('%s\t%d\n' % (graph['in'][currentId], JUMP_TAG))
             count += 1
 
         else: # walk
             currentId = random.choice(graph[currentId])
-            out.write('%s\t%d\n' % (currentId, WALK_TAG))
+            out.write('%s\t%d\n' % (graph['in'][currentId], WALK_TAG))
             count += 1
 
 
