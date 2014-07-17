@@ -45,7 +45,8 @@ def estiamteAverDegree(sampleFilename, averDFilename):
 
 
 def averDegree(graphDegFilename, direction):
-    print 'Calculating Average', direction, 'Degree of', graphDegFilename
+    #print 'Calculating Average', direction, 'Degree of', graphDegFilename
+    print '\'' + os.path.basename(graphDegFilename) + '\':',
     f = open(graphDegFilename)
     averDeg = 0.0
     count = 0
